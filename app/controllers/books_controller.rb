@@ -1,11 +1,10 @@
 class BooksController < ApplicationController
-
-  before_action :is_matching_login_user, only: [:edit]
+  before_action :authenticate_user!
+  before_action :is_matching_login_user, only: [:edit, :update, :destroy]
 
   def show
-    @book = Book.new
-    @book2 = Book.find(params[:id])
-    @user = @book2.user
+    @book = Book.find(params[:id])
+    @book_new = Book.new
   end
 
   def index
